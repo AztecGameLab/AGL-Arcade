@@ -4,7 +4,9 @@ using SFB;
 using TMPro;
 using TriInspector;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 using File = UnityEngine.Windows.File;
 
 [HideMonoScript]
@@ -16,7 +18,7 @@ public class GameButtons : MonoBehaviour
     
     public void StartGame()
     {
-        if (File.Exists(directory.text)) { Process.Start(directory.text); }
+        if (Directory.Exists(directory.text)) { Process.Start(directory.text); }
     }
 
     public void DownloadLink() { Application.OpenURL(GameLink); }
@@ -34,6 +36,15 @@ public class GameButtons : MonoBehaviour
     public void DeleteFile()
     {
         
+        var extensions = new [] {
+            new ExtensionFilter("Application", "app" ),
+        };
+        var path = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false)[0];
+        if (path.IsUnityNull()) return;
+        var pathName = Path.GetFileName(path);
+        var trashPath = Path.Combine(Application.persistentDataPath, "Trash", pathName);
+        Directory.Move(path, trashPath);
+        Directory.Delete(trashPath);
     }
     
 }
