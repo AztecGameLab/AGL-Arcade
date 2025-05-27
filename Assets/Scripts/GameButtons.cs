@@ -3,16 +3,18 @@ using System.Diagnostics;
 using System.IO;
 using Cysharp.Threading.Tasks;
 using TMPro;
+using TriInspector;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 using File = UnityEngine.Windows.File;
 
+[HideMonoScript]
 public class GameButtons : MonoBehaviour
 {
     [SerializeField] private TMP_InputField url;
-    private string GameLink { get; set; }
+    public string GameLink { get; set; }
     
     
     public void StartGame()
@@ -37,4 +39,5 @@ public class GameButtons : MonoBehaviour
     {
         
     }
+    
 }
