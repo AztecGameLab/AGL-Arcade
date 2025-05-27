@@ -221,6 +221,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1065719587}
+        m_TargetAssemblyTypeName: GameButtons, Assembly-CSharp
+        m_MethodName: SetIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 228818487}
         m_TargetAssemblyTypeName: GameSelector, Assembly-CSharp
         m_MethodName: SelectGame
@@ -717,12 +729,12 @@ RectTransform:
   m_Children:
   - {fileID: 1417321916}
   - {fileID: 303888419}
-  - {fileID: 597287313}
-  - {fileID: 309961666}
-  - {fileID: 1775366776}
   - {fileID: 1769837022}
+  - {fileID: 597287313}
   - {fileID: 1095893995}
+  - {fileID: 309961666}
   - {fileID: 16991373}
+  - {fileID: 1775366776}
   - {fileID: 1683658127}
   m_Father: {fileID: 1065719591}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -902,6 +914,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1065719587}
+        m_TargetAssemblyTypeName: GameButtons, Assembly-CSharp
+        m_MethodName: SetIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 228818487}
         m_TargetAssemblyTypeName: GameSelector, Assembly-CSharp
         m_MethodName: SelectGame
@@ -1051,6 +1075,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1065719587}
+        m_TargetAssemblyTypeName: GameButtons, Assembly-CSharp
+        m_MethodName: SetIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 228818487}
         m_TargetAssemblyTypeName: GameSelector, Assembly-CSharp
         m_MethodName: SelectGame
@@ -1845,6 +1881,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1065719587}
+        m_TargetAssemblyTypeName: GameButtons, Assembly-CSharp
+        m_MethodName: SetIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 228818487}
         m_TargetAssemblyTypeName: GameSelector, Assembly-CSharp
         m_MethodName: SelectGame
@@ -3000,6 +3048,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selector: {fileID: 228818487}
   directory: {fileID: 1530811149}
+  buttons:
+  - {fileID: 1417321918}
+  - {fileID: 303888421}
+  - {fileID: 1769837024}
+  - {fileID: 597287315}
+  - {fileID: 1095893997}
+  - {fileID: 309961668}
+  - {fileID: 16991375}
+  - {fileID: 1775366778}
+  - {fileID: 1683658129}
 --- !u!114 &1065719588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3191,6 +3249,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1065719587}
+        m_TargetAssemblyTypeName: GameButtons, Assembly-CSharp
+        m_MethodName: SetIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 228818487}
         m_TargetAssemblyTypeName: GameSelector, Assembly-CSharp
         m_MethodName: SelectGame
@@ -3944,6 +4014,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1065719587}
+        m_TargetAssemblyTypeName: GameButtons, Assembly-CSharp
+        m_MethodName: SetIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 228818487}
         m_TargetAssemblyTypeName: GameSelector, Assembly-CSharp
         m_MethodName: SelectGame
@@ -4794,6 +4876,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1065719587}
+        m_TargetAssemblyTypeName: GameButtons, Assembly-CSharp
+        m_MethodName: SetIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 8
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 228818487}
         m_TargetAssemblyTypeName: GameSelector, Assembly-CSharp
         m_MethodName: SelectGame
@@ -5215,6 +5309,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1065719587}
+        m_TargetAssemblyTypeName: GameButtons, Assembly-CSharp
+        m_MethodName: SetIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 228818487}
         m_TargetAssemblyTypeName: GameSelector, Assembly-CSharp
         m_MethodName: SelectGame
@@ -5364,6 +5470,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1065719587}
+        m_TargetAssemblyTypeName: GameButtons, Assembly-CSharp
+        m_MethodName: SetIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 228818487}
         m_TargetAssemblyTypeName: GameSelector, Assembly-CSharp
         m_MethodName: SelectGame

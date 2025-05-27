@@ -1,6 +1,5 @@
 using TriInspector;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [HideMonoScript]
 [CreateAssetMenu(menuName = "GameData")]
@@ -22,4 +21,9 @@ public class GameData : ScriptableObject
     [Tooltip("The name of the file that is executed to run the game.")]
     public string executableFile;
 
+}
+
+public class ArcadeData
+{
+    public string[] gameURLs = new string[10];
 }

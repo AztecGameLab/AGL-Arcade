@@ -1,12 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using TMPro;
 using TriInspector;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.Windows;
 using Button = UnityEngine.UI.Button;
 using File = UnityEngine.Windows.File;
 using Image = UnityEngine.UI.Image;
@@ -39,8 +34,13 @@ public class GameSelector : MonoBehaviour
     [SerializeField] private GameButtons buttonController;
     
     
+    
+    
     // Start is called before the first frame update
-    private void Start() { SelectGame(defaultGame); }
+    private void Start()
+    {
+        SelectGame(defaultGame);
+    }
 
     public void SelectGame(GameData game)
     {
@@ -49,8 +49,8 @@ public class GameSelector : MonoBehaviour
         buttonController.GameLink = game.url;
 
         data = game;
+        buttonController.UpdateURL();
         UpdatePage();
-
     }
 
     public void UpdatePage()
