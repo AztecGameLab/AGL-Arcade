@@ -19,5 +19,7 @@ public class GameData : ScriptableObject
     public string description;
     [Tooltip("URL to the game's Itch.io download page.")]
     public string url;
+    [Tooltip("The name of the file that is executed to run the game.")]
+    public string executableFile;
 
 }
