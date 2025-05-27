@@ -6,7 +6,9 @@ using TriInspector;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using File = UnityEngine.Windows.File;
+using Directory = System.IO.Directory;
+using File = System.IO.File;
+using Input = UnityEngine.Input;
 
 [HideMonoScript]
 public class GameButtons : MonoBehaviour
@@ -16,14 +18,14 @@ public class GameButtons : MonoBehaviour
     public string GameLink { get; set; }
     [SerializeField] private Button[] buttons;
     private int buttonIndex;
-    private ArcadeData Data { get; set; }
+    private ArcadeData Data;
 
     public void Start()
     {
         string filePath = Application.persistentDataPath + "/ArcadeData.json";
         if (File.Exists(filePath))
         {
-            var data = System.IO.File.ReadAllText(filePath);
+            var data = File.ReadAllText(filePath);
             Data = JsonUtility.FromJson<ArcadeData>(data);
         }
         else{Data = new ArcadeData();}
@@ -73,6 +75,10 @@ public class GameButtons : MonoBehaviour
         {
             PreviousButton();
         }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     private void NextButton()
@@ -105,7 +111,7 @@ public class GameButtons : MonoBehaviour
     
     private void SaveIntoJson(){
         var data = JsonUtility.ToJson(Data);
-        System.IO.File.WriteAllText(Application.persistentDataPath + "/ArcadeData.json", data);
+        File.WriteAllText(Application.persistentDataPath + "/ArcadeData.json", data);
     }
 
 }

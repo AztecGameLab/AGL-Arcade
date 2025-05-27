@@ -23,6 +23,7 @@ public class GameData : ScriptableObject
 
 }
 
+[System.Serializable]
 public class ArcadeData
 {
     public string[] gameURLs = new string[10];

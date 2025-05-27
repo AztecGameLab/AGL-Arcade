@@ -3,7 +3,7 @@ using TMPro;
 using TriInspector;
 using UnityEngine;
 using Button = UnityEngine.UI.Button;
-using File = UnityEngine.Windows.File;
+using File = System.IO.File;
 using Image = UnityEngine.UI.Image;
 
 [HideMonoScript]
