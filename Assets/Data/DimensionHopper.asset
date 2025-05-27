@@ -16,3 +16,4 @@ MonoBehaviour:
   unlocked: {fileID: 21300000, guid: c2a0431096a844f0aaebdc52f610e3b9, type: 3}
   description: Chase Sir Zebulon through new Dimensions!
   url: https://aztec-game-lab.itch.io/dimension-hopper/purchase
+  executableFile: DimensionHopperMac

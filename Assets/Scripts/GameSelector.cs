@@ -7,6 +7,7 @@ using TriInspector;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Windows;
+using Button = UnityEngine.UI.Button;
 using File = UnityEngine.Windows.File;
 using Image = UnityEngine.UI.Image;
 
@@ -25,8 +26,15 @@ public class GameSelector : MonoBehaviour
     [SerializeField] private TextMeshProUGUI description;
     [Tooltip("Location of the game in the player's system.")]
     [SerializeField] private TMP_InputField directory;
+
+    [Tooltip("Data for the current game")] 
+    private GameData data;
     
-    [Header("Sister Scripts")]
+    [Header("Buttons")]
+    [Tooltip("The Play Button")]
+    [SerializeField] private Button playButton;
+    [Tooltip("The Delete Button")] 
+    [SerializeField] private Button deleteButton;
     [Tooltip("Script that controls the buttons")]
     [SerializeField] private GameButtons buttonController;
     
@@ -38,10 +46,21 @@ public class GameSelector : MonoBehaviour
     {
 
         description.text = game.description;
-        
-        var gamePath = Path.Combine(directory.text, "Contents/MacOS", game.executableFile);
-        image.sprite = File.Exists(gamePath) ? game.unlocked : game.locked;
-
         buttonController.GameLink = game.url;
+
+        data = game;
+        UpdatePage();
+
+    }
+
+    public void UpdatePage()
+    {
+        var gamePath = Path.Combine(directory.text, "Contents/MacOS", data.executableFile);
+        var fileExists = File.Exists(gamePath);
+        image.sprite = fileExists ? data.unlocked : data.locked;
+        playButton.interactable = fileExists;
+        deleteButton.interactable = fileExists;
+        //playButton.color = fileExists ? new Color(85, 245, 115) : Color.gray;
+        //deleteButton.color = fileExists ? new Color(245, 90, 90) : Color.gray;
     }
 }
