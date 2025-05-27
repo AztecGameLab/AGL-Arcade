@@ -35,16 +35,15 @@ public class GameButtons : MonoBehaviour
 
     public void DeleteFile()
     {
-        
         var extensions = new [] {
             new ExtensionFilter("Application", "app" ),
         };
         var path = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false)[0];
         if (path.IsUnityNull()) return;
-        var pathName = Path.GetFileName(path);
-        var trashPath = Path.Combine(Application.persistentDataPath, "Trash", pathName);
+        var trashPath = Path.Combine(Application.persistentDataPath, "Trash");
         Directory.Move(path, trashPath);
-        Directory.Delete(trashPath);
+        Directory.Delete(trashPath, true);
+        selector.UpdatePage();
     }
     
 }
