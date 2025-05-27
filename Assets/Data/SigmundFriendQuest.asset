@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4899b71b581f24bb58f2a17ade979616, type: 3}
   m_Name: SigmundFriendQuest
   m_EditorClassIdentifier: 
+  locked: {fileID: 21300000, guid: fc0ce8e18b6744f4a9e71c2b80f06aa9, type: 3}
+  unlocked: {fileID: 21300000, guid: 0c722e04282b842c6807fca339def6e2, type: 3}
+  description: After getting stuck on an unfamiliar planet, Sigmund must adventure
+    strange new lands and solve puzzles to make it home, with the guidance of his
+    best friend Eggy.
+  url: https://aztec-game-lab.itch.io/sigmunds-friend-quest/purchase

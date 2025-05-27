@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4899b71b581f24bb58f2a17ade979616, type: 3}
   m_Name: Saguaro
   m_EditorClassIdentifier: 
+  locked: {fileID: 21300000, guid: 9d8fe5885175044b5a6d58b62abf3d71, type: 3}
+  unlocked: {fileID: 21300000, guid: c51c8905c5a6f47b4b198ba140e87834, type: 3}
+  description: Saguaro, a kangaroo rat, is challenged by the Coyote, a trickster
+    god, to defeat the apex predators of the desert.
+  url: https://aztec-game-lab.itch.io/saguaro/purchase

@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4899b71b581f24bb58f2a17ade979616, type: 3}
   m_Name: RuinsOfArtemis
   m_EditorClassIdentifier: 
+  locked: {fileID: 21300000, guid: 12465bebb1f204508ac705972eac91c5, type: 3}
+  unlocked: {fileID: 21300000, guid: 0699260feafb44611bf1ec04b5bb0d91, type: 3}
+  description: A first-person puzzle game where you must use your elemental bow and
+    arrow abilities to escape the Ruins of Artemis!
+  url: https://aztec-game-lab.itch.io/ruins-of-artemis/purchase

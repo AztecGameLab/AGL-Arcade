@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4899b71b581f24bb58f2a17ade979616, type: 3}
   m_Name: Kappi
   m_EditorClassIdentifier: 
+  locked: {fileID: 21300000, guid: 5e73a05a1639e442db70a96e7a3888f9, type: 3}
+  unlocked: {fileID: 21300000, guid: 01a6d6d22c3c04f5db7451ca4421dcae, type: 3}
+  description: Explore fantastical environments as you fight mysterious creatures,
+    meet mystical gods, and grow your powers.
+  url: https://aztec-game-lab.itch.io/kappi/purchase
