@@ -6,6 +6,7 @@ using TriInspector;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using File = UnityEngine.Windows.File;
 
 [HideMonoScript]
 public class GameButtons : MonoBehaviour
@@ -19,7 +20,13 @@ public class GameButtons : MonoBehaviour
 
     public void Start()
     {
-        Data = new ArcadeData();
+        string filePath = Application.persistentDataPath + "/ArcadeData.json";
+        if (File.Exists(filePath))
+        {
+            var data = System.IO.File.ReadAllText(filePath);
+            Data = JsonUtility.FromJson<ArcadeData>(data);
+        }
+        else{Data = new ArcadeData();}
     }
 
 
@@ -38,6 +45,7 @@ public class GameButtons : MonoBehaviour
         var path = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false)[0];
         directory.text = path ?? "";
         Data.gameURLs[buttonIndex] = path ?? "";
+        SaveIntoJson();
         selector.UpdatePage();
     }
 
@@ -93,6 +101,11 @@ public class GameButtons : MonoBehaviour
     {
         if (Data.IsUnityNull()) return;
         directory.text = Data.gameURLs[buttonIndex];
+    }
+    
+    private void SaveIntoJson(){
+        var data = JsonUtility.ToJson(Data);
+        System.IO.File.WriteAllText(Application.persistentDataPath + "/ArcadeData.json", data);
     }
 
 }
