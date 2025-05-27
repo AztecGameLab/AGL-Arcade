@@ -16,19 +16,12 @@ public class GameButtons : MonoBehaviour
     [SerializeField] private TMP_InputField url;
     public string GameLink { get; set; }
     
-    
     public void StartGame()
     {
-        if (File.Exists(url.text))
-        {
-            Process.Start(url.text);
-        }
+        if (File.Exists(url.text)) { Process.Start(url.text); }
     }
 
-    public void DownloadLink()
-    {
-        Application.OpenURL(GameLink);
-    }
+    public void DownloadLink() { Application.OpenURL(GameLink); }
 
     public void LocateFile()
     {

@@ -32,10 +32,7 @@ public class GameSelector : MonoBehaviour
     
     
     // Start is called before the first frame update
-    private void Start()
-    {
-        SelectGame(defaultGame);
-    }
+    private void Start() { SelectGame(defaultGame); }
 
     public void SelectGame(GameData game)
     {
