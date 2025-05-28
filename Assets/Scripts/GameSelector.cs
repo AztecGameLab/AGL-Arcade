@@ -9,21 +9,17 @@ using Image = UnityEngine.UI.Image;
 [HideMonoScript]
 public class GameSelector : MonoBehaviour
 {
-
-    [Header("Defaults")]
-    [Tooltip("The game that will be displayed by default.")]
-    [SerializeField] private GameData defaultGame;
+    
+    [Tooltip("Data for the current game")] 
+    [SerializeField] private GameData data;
     
     [Header("Info Page Assets")]
-    [Tooltip("The image of the game.")]
+    [Tooltip("The image of the selected game.")]
     [SerializeField] private Image image;
-    [Tooltip("The description for the game.")]
+    [Tooltip("The description for the selected game.")]
     [SerializeField] private TextMeshProUGUI description;
-    [Tooltip("Location of the game in the player's system.")]
+    [Tooltip("Location of the selected game in the player's system.")]
     [SerializeField] private TMP_InputField directory;
-
-    [Tooltip("Data for the current game")] 
-    private GameData data;
     
     [Header("Buttons")]
     [Tooltip("The Play Button")]
@@ -33,34 +29,36 @@ public class GameSelector : MonoBehaviour
     [Tooltip("Script that controls the buttons")]
     [SerializeField] private GameButtons buttonController;
     
-    
-    
-    
-    // Start is called before the first frame update
-    private void Start()
-    {
-        SelectGame(defaultGame);
-    }
+    // When the game starts, select the default game 
+    private void Start() { SelectGame(data); }
 
+    /// <summary> Changes the Arcade Menu page to the selected game </summary>
+    /// <param name="game"> The selected game </param>
     public void SelectGame(GameData game)
     {
-
+        // Change the description and the download page URL
         description.text = game.description;
         buttonController.GameLink = game.url;
-
+        
+        // Set data (the current game) to the selected game
         data = game;
-        buttonController.UpdateURL();
+        
+        // Update the directory in the game's saved data 
+        buttonController.UpdateDirectory();
+        
         UpdatePage();
     }
 
+    /// <summary> Update the Arcade Menu Page, depending on whether the game is installed </summary>
     public void UpdatePage()
     {
+        // Check if the directory given leads to a valid game file
         var gamePath = Path.Combine(directory.text, "Contents/MacOS", data.executableFile);
         var fileExists = File.Exists(gamePath);
+        
+        // If so, show a colored image, and enable the play/delete buttons
         image.sprite = fileExists ? data.unlocked : data.locked;
         playButton.interactable = fileExists;
         deleteButton.interactable = fileExists;
-        //playButton.color = fileExists ? new Color(85, 245, 115) : Color.gray;
-        //deleteButton.color = fileExists ? new Color(245, 90, 90) : Color.gray;
     }
 }

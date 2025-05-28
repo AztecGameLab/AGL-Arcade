@@ -13,40 +13,77 @@ using Input = UnityEngine.Input;
 [HideMonoScript]
 public class GameButtons : MonoBehaviour
 {
-    [SerializeField] private GameSelector selector;
-    [SerializeField] private TMP_InputField directory;
-    public string GameLink { get; set; }
-    [SerializeField] private Button[] buttons;
-    private int buttonIndex;
+    /// <summary> Saved Data for AGL-Arcade </summary>
     private ArcadeData Data;
+    
+    [Header("Game Components")]
+    
+    [Tooltip("The script that manages the game selection menu")]
+    [SerializeField] private GameSelector selector;
+    [Tooltip("The data for each game in the arcade")]
+    [SerializeField] private GameData[] allData;
+    
+    [Header("Page Data")]
+    
+    [Tooltip("The directory of the currently selected game")]
+    [SerializeField] private TMP_InputField directory;
+    /// <summary> The link to the download page of the currently selected game </summary>
+    public string GameLink { get; set; }
+    
+    [Tooltip("All of the game-selection buttons")]
+    [SerializeField] private Button[] buttons;
+    /// <summary> The index of the the currently selected game </summary>
+    private int buttonIndex;
+    
 
     public void Start()
     {
-        string filePath = Application.persistentDataPath + "/ArcadeData.json";
-        if (File.Exists(filePath))
-        {
+        // Check if saved data for AGL-Arcade already exists
+        var filePath = Application.persistentDataPath + "/ArcadeData.json";
+        // If it exists
+        if (File.Exists(filePath)) {
+            // Set the game's current data to the saved local data
             var data = File.ReadAllText(filePath);
             Data = JsonUtility.FromJson<ArcadeData>(data);
         }
+        // Otherwise, create a new JSON file for saved data
         else{Data = new ArcadeData();}
     }
 
-
+    /// <summary> Functionality for the "Play" Button </summary>
     public void StartGame()
     {
-        if (Directory.Exists(directory.text)) { Process.Start(directory.text); }
+        // If the game is installed, open the application
+        if (Directory.Exists(directory.text)) 
+        { Process.Start(directory.text); }
     }
-
+    
+    /// <summary> Functionality for the "Link to Download Page" Button </summary>
     public void DownloadLink() { Application.OpenURL(GameLink); }
 
+    /// <summary> Functionality for the "Locate" Button </summary>
     public void LocateFile()
     {
-        var extensions = new [] {
-            new ExtensionFilter("Application", "app" ),
-        };
+        // The extensions that are allowed to be selected
+        var extensions = new [] { new ExtensionFilter("Application", "app" ), };
         var path = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false)[0];
         directory.text = path ?? "";
-        Data.gameURLs[buttonIndex] = path ?? "";
+        Data.gameDirectories[buttonIndex] = path ?? "";
+        SaveIntoJson();
+        selector.UpdatePage();
+    }
+
+    public void LocateAllFiles()
+    {
+        var path = StandaloneFileBrowser.OpenFolderPanel("Open Folder", "", false)[0];
+        if (path == "") return;
+        var list = Directory.GetDirectories(path);
+        foreach(var item in list) {
+            var gameFile = Directory.GetFiles(item + "/Contents/MacOS")[0];
+            for (var i = 0; i < allData.Length; i++) {
+                if (!Path.GetFileName(gameFile).Equals(allData[i].executableFile)) continue;
+                Data.gameDirectories[i] = item; }
+        }
         SaveIntoJson();
         selector.UpdatePage();
     }
@@ -103,10 +140,10 @@ public class GameButtons : MonoBehaviour
         buttonIndex = index;
     }
 
-    public void UpdateURL()
+    public void UpdateDirectory()
     {
         if (Data.IsUnityNull()) return;
-        directory.text = Data.gameURLs[buttonIndex];
+        directory.text = Data.gameDirectories[buttonIndex];
     }
     
     private void SaveIntoJson(){

@@ -26,5 +26,6 @@ public class GameData : ScriptableObject
 [System.Serializable]
 public class ArcadeData
 {
-    public string[] gameURLs = new string[10];
+    [Tooltip("The saved directories of each AGL games.")]
+    public string[] gameDirectories = new string[10];
 }
