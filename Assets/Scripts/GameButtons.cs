@@ -45,6 +45,8 @@ public class GameButtons : MonoBehaviour
             // Set the game's current data to the saved local data
             var data = File.ReadAllText(filePath);
             Data = JsonUtility.FromJson<ArcadeData>(data);
+            directory.text = Data.gameDirectories[0];
+            selector.UpdatePage();
         }
         // Otherwise, create a new JSON file for saved data
         else{Data = new ArcadeData();}
@@ -132,9 +134,9 @@ public class GameButtons : MonoBehaviour
     private void Update()
     {
         // Select the next game using the "Down Arrow" or "S" Key
-        if(Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) { NextButton(); }
+        if(Input.GetKeyDown(KeyCode.DownArrow)) { NextButton(); }
         // Select the next game using the "Up Arrow" or "W" Key
-        else if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) { PreviousButton(); }
+        else if(Input.GetKeyDown(KeyCode.UpArrow)) { PreviousButton(); }
         // Quit AGL-Arcade using the Escape key
         else if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
     }
