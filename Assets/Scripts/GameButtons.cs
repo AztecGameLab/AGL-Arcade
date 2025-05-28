@@ -50,6 +50,10 @@ public class GameButtons : MonoBehaviour
         else{Data = new ArcadeData();}
     }
 
+    /* -------------------
+     * Game Menu Buttons |
+     * ------------------- */
+    
     /// <summary> Functionality for the "Play" Button </summary>
     public void StartGame()
     {
@@ -66,87 +70,122 @@ public class GameButtons : MonoBehaviour
     {
         // The extensions that are allowed to be selected
         var extensions = new [] { new ExtensionFilter("Application", "app" ), };
+        // Open the File Explorer, have the user choose the .app file of the game
         var path = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false)[0];
+        // Set the "Current Directory" text to the chosen directory
         directory.text = path ?? "";
+        // Set the game's directory in the Arcade's Saved Data to the chosen directory
         Data.gameDirectories[buttonIndex] = path ?? "";
+        // Save the Data and Update the page with the chosen directory 
         SaveIntoJson();
         selector.UpdatePage();
     }
 
+    /// <summary> Functionality for the "Locate Folder" Button </summary>
     public void LocateAllFiles()
     {
+        // Have the user choose a directory / folder 
         var path = StandaloneFileBrowser.OpenFolderPanel("Open Folder", "", false)[0];
-        if (path == "") return;
+        if (path == "") return; // If nothing is chosen, return
+        // Get all the folders inside this directory
         var list = Directory.GetDirectories(path);
+        // For each folder
         foreach(var item in list) {
+            // Check if it contents the path /Contents/MacOS/[ExecutableFileName]
+            // If so, set the saved directory for the game in the Arcade Saved Data to this directory
             var gameFile = Directory.GetFiles(item + "/Contents/MacOS")[0];
             for (var i = 0; i < allData.Length; i++) {
                 if (!Path.GetFileName(gameFile).Equals(allData[i].executableFile)) continue;
                 Data.gameDirectories[i] = item; }
         }
+        // Save the Data and Update the page with the chosen directory 
         SaveIntoJson();
         selector.UpdatePage();
     }
 
+    /// <summary> Functionality for the "Delete" Button </summary>
     public void DeleteFile()
     {
-        var extensions = new [] {
-            new ExtensionFilter("Application", "app" ),
-        };
-        var parent = Directory.GetParent(directory.text).FullName;
+        // The extension of the file the user can choose to delete
+        var extensions = new [] { new ExtensionFilter("Application", "app" ),};
+        // Retrieve the name of the directory the "File to be Deleted" is in
+        var parentDir = Directory.GetParent(directory.text); string parent;
+        if (parentDir != null) { parent = parentDir.FullName; }
+        else {parent = "";}
+        // Open up this directory, and allow the user to select the .app file they want to delete (confirmation action)
         var path = StandaloneFileBrowser.OpenFilePanel("Open File", parent, extensions, false)[0];
-        if (path == "") return;
+        if (path == "" || path != directory.text) return; // If no file is chosen, or the wrong file is chosen, return
+        // Create a trash directory in the persistent data path (Safer than directly deleting the file)
         var trashPath = Path.Combine(Application.persistentDataPath, "Trash");
+        // Move the file to the trash directory, and then delete the trash directory
         Directory.Move(path, trashPath);
         Directory.Delete(trashPath, true);
+        // Update the Arcade Menu page 
         selector.UpdatePage();
     }
 
+    /* ---------------------
+     * Arrow Key Selection |
+     * --------------------- */
+    
+    // Key Input Functionality
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
-        {
-            NextButton();
-        }
-        else if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
-        {
-            PreviousButton();
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
+        // Select the next game using the "Down Arrow" or "S" Key
+        if(Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) { NextButton(); }
+        // Select the next game using the "Up Arrow" or "W" Key
+        else if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) { PreviousButton(); }
+        // Quit AGL-Arcade using the Escape key
+        else if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
     }
 
-    private void NextButton()
-    {
-        if (buttonIndex == buttons.Length - 1) return;
-        buttonIndex++; 
-        buttons[buttonIndex].Select();
+    /// <summary> Functionality for selecting the next game </summary>
+    private void NextButton() {
+        // If the last game is currently selected, loop back to the first game
+        if (buttonIndex == buttons.Length - 1) buttonIndex = 0;
+        else {buttonIndex++;} // Otherwise, increment the index
+
+        // Select and Click the button at this index
+        buttons[buttonIndex].Select(); 
         buttons[buttonIndex].onClick.Invoke();
     }
 
+    /// <summary> Functionality for selecting the previous game </summary>
     private void PreviousButton()
     {
-        if (buttonIndex == 0) return;
-        buttonIndex--; 
+        // If the first game is currently selected, skip to the last game
+        if (buttonIndex == 0) buttonIndex = buttons.Length - 1;
+        else {buttonIndex--;} // Otherwise, decrement the index
+
+        // Select and Click the button at this index
         buttons[buttonIndex].Select();
         buttons[buttonIndex].onClick.Invoke();
     }
 
+    /// <summary> Functionality for changing the button index when a button is clicked w/ the mouse </summary>
     public void SetIndex(int index)
     {
+        // If the index is out of range, return
         if (index > buttons.Length || index < 0) return;
         buttonIndex = index;
     }
-
+    
+    /* ---------------------
+     * Arcade Saved Data |
+     * --------------------- */    
+    
+    /// <summary> Update the "current directory" using the Saved Data </summary>
     public void UpdateDirectory()
     {
+        // If there is no Saved Data, return
         if (Data.IsUnityNull()) return;
+        // Set the "Current Directory" to the saved directory of the current game 
         directory.text = Data.gameDirectories[buttonIndex];
     }
     
+    /// <summary> Save AGL-Arcade Data </summary>
     private void SaveIntoJson(){
+        // Write the current Data into the /ArcadeData.json Saved Data File
         var data = JsonUtility.ToJson(Data);
         File.WriteAllText(Application.persistentDataPath + "/ArcadeData.json", data);
     }
