@@ -16,3 +16,4 @@ MonoBehaviour:
   unlocked: {fileID: 21300000, guid: cefdc1fa94fca404abc1b3daa90af1fe, type: 3}
   description: A first-person shooter with procedurally generated weapons and levels!
   url: https://aztec-game-lab.itch.io/cybershell/purchase
+  executableFile: CyberShell.exe

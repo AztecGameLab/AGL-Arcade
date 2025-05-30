@@ -51,12 +51,17 @@ public class GameSelector : MonoBehaviour
     public void UpdatePage()
     {
         // Check if the directory given leads to a valid game file
-        var gamePath = Path.Combine(directory.text, "Contents/MacOS", data.executableFile);
+        var gamePath = Path.Combine(directory.text, data.executableFile);
         var fileExists = File.Exists(gamePath);
         
         // If so, show a colored image, and enable the play/delete buttons
         image.sprite = fileExists ? data.unlocked : data.locked;
         playButton.interactable = fileExists;
         deleteButton.interactable = fileExists;
+    }
+
+    public GameData GetData()
+    {
+        return data;
     }
 }

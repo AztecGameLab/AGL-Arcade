@@ -16,3 +16,4 @@ MonoBehaviour:
   unlocked: {fileID: 21300000, guid: 6f7f8a91f57e54c15a448246b5cd5af0, type: 3}
   description: A Flurry of Medieval Minigames!
   url: https://aztec-game-lab.itch.io/antediluviananarchy/purchase
+  executableFile: AntediluvianAnarchy.exe

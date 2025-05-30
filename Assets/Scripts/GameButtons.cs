@@ -32,7 +32,7 @@ public class GameButtons : MonoBehaviour
     
     [Tooltip("All of the game-selection buttons")]
     [SerializeField] private Button[] buttons;
-    /// <summary> The index of the the currently selected game </summary>
+    /// <summary> The index of the currently selected game </summary>
     private int buttonIndex;
     
 
@@ -61,7 +61,7 @@ public class GameButtons : MonoBehaviour
     {
         // If the game is installed, open the application
         if (Directory.Exists(directory.text)) 
-        { Process.Start(directory.text); }
+        { Process.Start(directory.text + "/" + selector.GetData().executableFile); }
     }
     
     /// <summary> Functionality for the "Link to Download Page" Button </summary>
@@ -70,10 +70,8 @@ public class GameButtons : MonoBehaviour
     /// <summary> Functionality for the "Locate" Button </summary>
     public void LocateFile()
     {
-        // The extensions that are allowed to be selected
-        var extensions = new [] { new ExtensionFilter("Application", "app" ), };
         // Open the File Explorer, have the user choose the .app file of the game
-        var path = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, false)[0];
+        var path = StandaloneFileBrowser.OpenFolderPanel("Open Folder", "", false)[0];
         // Set the "Current Directory" text to the chosen directory
         directory.text = path ?? "";
         // Set the game's directory in the Arcade's Saved Data to the chosen directory
@@ -93,12 +91,15 @@ public class GameButtons : MonoBehaviour
         var list = Directory.GetDirectories(path);
         // For each folder
         foreach(var item in list) {
-            // Check if it contents the path /Contents/MacOS/[ExecutableFileName]
+            // Check if it contains the valid .exe file
             // If so, set the saved directory for the game in the Arcade Saved Data to this directory
-            var gameFile = Directory.GetFiles(item + "/Contents/MacOS")[0];
-            for (var i = 0; i < allData.Length; i++) {
-                if (!Path.GetFileName(gameFile).Equals(allData[i].executableFile)) continue;
-                Data.gameDirectories[i] = item; }
+            var gameFiles = Directory.GetFiles(item);
+            foreach (var gameFile in gameFiles)
+            {
+                for (var i = 0; i < allData.Length; i++) {
+                    if (!Path.GetFileName(gameFile).Equals(allData[i].executableFile)) continue;
+                    Data.gameDirectories[i] = item; }
+            }
         }
         // Save the Data and Update the page with the chosen directory 
         SaveIntoJson();
@@ -108,14 +109,12 @@ public class GameButtons : MonoBehaviour
     /// <summary> Functionality for the "Delete" Button </summary>
     public void DeleteFile()
     {
-        // The extension of the file the user can choose to delete
-        var extensions = new [] { new ExtensionFilter("Application", "app" ),};
-        // Retrieve the name of the directory the "File to be Deleted" is in
+        // Retrieve the name of the directory the "Folder to be Deleted" is in
         var parentDir = Directory.GetParent(directory.text); string parent;
         if (parentDir != null) { parent = parentDir.FullName; }
         else {parent = "";}
-        // Open up this directory, and allow the user to select the .app file they want to delete (confirmation action)
-        var path = StandaloneFileBrowser.OpenFilePanel("Open File", parent, extensions, false)[0];
+        // Open up this directory, and allow the user to select the folder they want to delete (confirmation action)
+        var path = StandaloneFileBrowser.OpenFolderPanel("Open Folder", parent, false)[0];
         if (path == "" || path != directory.text) return; // If no file is chosen, or the wrong file is chosen, return
         // Create a trash directory in the persistent data path (Safer than directly deleting the file)
         var trashPath = Path.Combine(Application.persistentDataPath, "Trash");
