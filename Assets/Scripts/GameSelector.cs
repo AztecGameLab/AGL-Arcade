@@ -45,6 +45,8 @@ public class GameSelector : MonoBehaviour
         
         // Update the directory in the game's saved data 
         buttonController.UpdateDirectory();
+
+        UpdatePage();
     }
 
     /// <summary> Update the Arcade Menu Page, depending on whether the game is installed </summary>
