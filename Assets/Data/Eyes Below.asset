@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4899b71b581f24bb58f2a17ade979616, type: 3}
+  m_Name: Eyes Below
+  m_EditorClassIdentifier: 
+  locked: {fileID: 1555666113458753184, guid: 4ad66f597f148504ea2cf6bc1311e37a, type: 3}
+  unlocked: {fileID: 1572069786694981662, guid: 6f1f25ebb804def479e57d30e24f1ef4, type: 3}
+  description: 'In search of a place to call home, a pirate, a magician, and an alchemist
+    stumble upon a great fortune: a chest filled to the brim with many doubloons
+    and jewels, enough to retire them early!   Ecstatic about their newly found fortune,
+    they attempt to rush back home, only to watch in horror as this large sea beast,
+    at instant speed, snatches their treasure and retreats, with the group only seeing
+    a splash coming from the nearby ocean! '
+  url: https://aztec-game-lab.itch.io/eyes-below
+  executableFile: Windows_EyesBelow_Release-1

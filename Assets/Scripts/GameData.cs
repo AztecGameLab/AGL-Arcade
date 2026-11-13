@@ -5,12 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "GameData")]
 public class GameData : ScriptableObject
 {
-    [Header("Images")]
+    [Header("Thumbnails")]
     
-    [Tooltip("The image that is shown when the game is not installed.")]
-    public Sprite locked;
-    [Tooltip("The image that is shown when the game is installed.")]
+    [Tooltip("The image that shows when the game is installed.")]
     public Sprite unlocked;
+    [Tooltip("The image that shows when the game is not installed.")]
+    public Sprite locked;
 
     [Header("Other")] 
     
@@ -26,6 +26,6 @@ public class GameData : ScriptableObject
 [System.Serializable]
 public class ArcadeData
 {
-    [Tooltip("The saved directories of each AGL games.")]
+    [Tooltip("The saved directories of each AGL game")]
     public string[] gameDirectories = new string[10];
 }

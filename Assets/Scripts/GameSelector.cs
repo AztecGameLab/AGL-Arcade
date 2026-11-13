@@ -11,7 +11,7 @@ public class GameSelector : MonoBehaviour
 {
     
     [Tooltip("Data for the current game")] 
-    [SerializeField] private GameData data;
+    [SerializeField] private GameData displayData;
     
     [Header("Info Page Assets")]
     [Tooltip("The image of the selected game.")]
@@ -30,7 +30,7 @@ public class GameSelector : MonoBehaviour
     [SerializeField] private GameButtons buttonController;
     
     // When the game starts, select the default game 
-    private void Start() { SelectGame(data); }
+    private void Start() { SelectGame(displayData); }
 
     /// <summary> Changes the Arcade Menu page to the selected game </summary>
     /// <param name="game"> The selected game </param>
@@ -41,7 +41,7 @@ public class GameSelector : MonoBehaviour
         buttonController.GameLink = game.url;
         
         // Set data (the current game) to the selected game
-        data = game;
+        displayData = game;
         
         // Update the directory in the game's saved data 
         buttonController.UpdateDirectory();
@@ -53,11 +53,11 @@ public class GameSelector : MonoBehaviour
     public void UpdatePage()
     {
         // Check if the directory given leads to a valid game file
-        var gamePath = Path.Combine(directory.text, "Contents/MacOS", data.executableFile);
+        var gamePath = Path.Combine(directory.text, "Contents/MacOS", displayData.executableFile);
         var fileExists = File.Exists(gamePath);
         
         // If so, show a colored image, and enable the play/delete buttons
-        image.sprite = fileExists ? data.unlocked : data.locked;
+        image.sprite = fileExists ? displayData.unlocked : displayData.locked;
         playButton.interactable = fileExists;
         deleteButton.interactable = fileExists;
     }
